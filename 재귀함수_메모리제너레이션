@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int memo[201] = { 0 };	//200보다 같거나 작다. 
+
+long long int recur(int a) {
+	if (a == 1 || a == 2) {
+		//recur(1), recur(2) 메모
+		memo[a] = 1;
+		return 1;
+	}
+	//메모한 값이 있다면 굳이 함수호출을 하지 않고 저장된 값 리턴
+	if (memo[a] != 0) {
+		return memo[a];
+	}
+	else {
+		//메모해둔 값이 없다면 함수 호출하고 recur(3이상) 메모
+		return memo[a] = (recur(a - 1) + recur(a - 2)) % 10009;
+	}
+}
+
+int main() {
+
+	int a;
+	scanf_s("%d", &a);
+	long long int result = recur(a);
+	printf("%lld\n", result);
+
+	return 0;
+}
