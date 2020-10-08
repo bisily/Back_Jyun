@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string strWord;
+    int iWordCnt = 0;
+    bool bFlag = false;
+
+    getline(cin, strWord);
+
+    for (size_t i = 0; i < strWord.size(); i++)
+    {
+        if (strWord[i] != NULL && strWord[i] != '\n')
+        {
+            if (strWord[i] == ' ')
+            {
+                if (bFlag)
+                {
+                    bFlag = false;
+                    iWordCnt++;
+                }
+            }
+            else
+            {
+                bFlag = true;
+            }
+        }
+
+    }
+
+    if (bFlag)
+    {
+        bFlag = false;
+        iWordCnt++;
+    }
+
+    cout << iWordCnt;
+
+    return 0;
+}
