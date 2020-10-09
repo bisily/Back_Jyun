@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+	int iN, iTem, iTem1;
+	vector<pair<int, int>> vVec;
+	
+	cin >> iN;
+	
+	vVec.reserve(iN);
+
+	for (int i = 0; i < iN; i++)
+	{
+		cin >> iTem >> iTem1;
+		vVec.push_back(make_pair(iTem, iTem1));
+
+	}
+	
+	sort(vVec.begin(), vVec.end());
+	
+	for (auto iter : vVec)
+	{
+		cout << iter.first << " " << iter.second << "\n";
+	}
+
+	return 0;
+}
+
+/*
+pair 라는 데이터 형식을 이용하여 int 2개의 값을 하나의 데이터로 취급하여 풀이가 가능하였다.
+*/
