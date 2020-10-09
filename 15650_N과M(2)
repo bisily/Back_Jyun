@@ -1,0 +1,48 @@
+#include <iostream> 
+#include <vector> 
+
+using namespace std; 
+
+const int MAX = 8 + 1; 
+int N, M; int arr[MAX] = {0 , };
+bool visited[MAX]{ false, };
+
+void func(int num, int cnt) 
+{ 
+	if (cnt == M)
+	{
+		for (int i = 0; i < M; i++)
+		{
+			cout << arr[i] << " ";
+		}
+		cout << "\n"; 
+		return;
+	}
+	
+	for (int i = num; i <= N; i++)
+	{
+		if (!visited[i])
+		{
+			visited[i] = true;
+			arr[cnt] = i;
+			func(i + 1, cnt + 1);
+			visited[i] = false;
+		}
+	}
+
+} 
+int main() 
+{ 
+	cin >> N >> M; 
+	func(1, 0); 
+
+	return 0; 
+}
+
+/*
+ 
+퍼옴 - 15649번이 dfs를 통한 순열 구하기였다면, 이번 문제는 dfs를 통한 조합 구하기라고 할 수 있다.
+for문의 index값을 함께 재귀함수의 인자로 넘겨주면 앞에서 이미 찾은 조합은 다시 뽑지 않도록 만들 수 있다.
+
+
+*/
