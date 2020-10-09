@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+bool Cmp(pair<int, string> iA, pair<int, string> iB)
+{
+	return iA.first < iB.first;
+}
+
+int main()
+{
+	int iN, iTem;
+	string iTem1;
+	vector<pair<int, string>> vVec;
+	
+	cin >> iN;
+	
+	vVec.reserve(iN);
+
+	for (int i = 0; i < iN; i++)
+	{
+		cin >> iTem >> iTem1;
+		vVec.push_back(make_pair(iTem, iTem1));
+
+	}
+	
+	stable_sort(vVec.begin(), vVec.end(), Cmp);
+	
+
+	for (auto iter : vVec)
+	{
+		cout << iter.first << " " << iter.second << "\n";
+	}
+
+	return 0;
+}
+
+/*
+sort와 stable_sort의 차이점
+
+[1] sort의 경우 3번째 매개변수 값을 지정하지 않을 경우
+defualt값으로 오름차순으로 정렬해준다.
+내림차순을 원한다면
+#include <functional> 선언
+srot(arr, arr+10, gerater<int>());
+
+[2] stable_srot의 경우 기본적으로 sort와 사용법이 같다
+sort와 다른 점은 정렬하는 원소값이 같은 경우이다.
+cmp는 순서쌍의 "첫번째 원소"가 작다면
+앞으로 오도록 하였다.(오름차순)
+
+정리 : sort의 경우 원소가 같으면 앞에 누가 올지 모른다.
+stable_srot는 컨테이너의 앞의 원소의 순서대로 정렬이 된다.
+*/
