@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+int iCnt_Num[8005] = { 0, };
+int iMax = -4005;
+int iMin = 4005;
+
+int main() 
+{
+
+	int iN, iX, iSum = 0, iMode_Cnt = 0, iMode_num;
+	vector<int> vNum;
+	vector<int> iMode;
+
+	cin >> iN;
+	vNum.reserve(iN);
+	iMode.reserve(iN);
+
+	for (int i = 0; i < iN; i++)
+	{
+		cin >> iX;
+		vNum.push_back(iX);
+		iSum += iX;
+
+		if (iMax < iX)
+		{
+			iMax = iX;
+		}
+
+		if (iX < iMin)
+		{
+			iMin = iX;
+		}
+
+		int iIndex = iX < 0 ? 8001 + iX : iX;
+		iCnt_Num[iIndex]++;
+
+		if (iMode_Cnt < iCnt_Num[iIndex])
+		{
+			iMode_Cnt = iCnt_Num[iIndex];
+			iMode.clear();
+			iMode.push_back(iX);
+		}
+		else if (iMode_Cnt == iCnt_Num[iIndex])
+		{
+			iMode.push_back(iX);
+		}
+	}
+
+	sort(vNum.begin(), vNum.end());
+
+	iMode_num = iMode[0];
+
+	if (1 < iMode.size())
+	{
+		sort(iMode.begin(), iMode.end());
+		iMode_num = iMode[1];
+	}
+
+
+	printf_s("%.0f\n%d\n%d\n%d\n", (double)iSum / iN, vNum[iN / 2], iMode_num, iMax - iMin);
+	/*cout << (double)iSum / iN << endl;
+	cout << vNum[iN / 2] << endl;
+	cout << iMode_num << endl;
+	cout << iMax - iMin << endl;*/
+
+	return 0;
+}
+
